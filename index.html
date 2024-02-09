@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pytanie o Walentynki</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            text-align: center;
+            background-image: url("images.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .form-container {
+            display: inline-block;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container.hidden {
+            display: none;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff66cc;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #ff3399;
+        }
+
+        .gif-container {
+            margin-top: 20px;
+            max-width: 100%;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container" id="valentine-form">
+        <form action="#" method="GET">
+            <label>Marysiu czy będziesz moją walentynką?</label><br>
+            <button type="button" name="answer" value="yes">Tak</button>
+            <button type="button" name="answer" value="no">Nie</button>
+        </form>
+    </div>
+
+    <div class="gif-container" id="gif1">
+        <img src="please.gif" alt="Gif">
+    </div>
+
+    <div class="gif-container hidden" id="gif2">
+        <img src="flower%20cat.gif" alt="Gif">
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-text"></p>
+    </div>
+</div>
+
+<script>
+    const formContainer = document.getElementById('valentine-form');
+    const gif1 = document.getElementById('gif1');
+    const gif2 = document.getElementById('gif2');
+
+    formContainer.addEventListener('click', function(e) {
+        e.preventDefault();
+        const answer = e.target.value;
+        if (answer === 'yes') {
+            gif1.querySelector('img').src = "kiss.gif"
+            gif2.querySelector('img').src = "happycat.gif";
+            showModal('Tak');
+            formContainer.classList.add('hidden');
+        } else if (answer === 'no') {
+            gif1.querySelector('img').src = "sadcat.gif"
+            gif2.querySelector('img').src = 'sadcat2.gif';
+            showModal('Nie');
+            formContainer.classList.add('hidden');
+        }
+    });
+
+    function showModal(answer) {
+        const modal = document.getElementById('myModal');
+        const modalText = document.getElementById('modal-text');
+        if(answer ==='Tak'){
+            modalText.textContent = 'JEEEEEEJ <3 <3 <3 ';
+            modal.style.display = 'block';
+        }
+        else{
+            modalText.textContent = ':ccccccccccccccccc';
+            modal.style.display = 'block';
+        }
+        const span = document.getElementsByClassName('close')[0];
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
